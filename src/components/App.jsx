@@ -6,21 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
 import { addContact, delContact } from 'redux/actions';
 
-// const getFromLocalStorage = key => {
-//   const contactsFromLocalStorage = localStorage.getItem(key);
-
-//   return contactsFromLocalStorage
-//     ? JSON.parse(contactsFromLocalStorage)
-//     : hardCodedContact;
-// };
-
-// const hardCodedContact = [
-//   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-//   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-//   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-//   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-// ];
-
 export const App = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
@@ -31,13 +16,7 @@ export const App = () => {
     localStorage.setItem('contactList', JSON.stringify(contacts));
   }, [contacts]);
 
-  // const handleChange = e => {
-  //   const { value } = e.target;
-  //   setFilter(value);
-  // };
-
   const handleSubmit = e => {
-    // const id = nanoid();
     const name = e.name;
     const number = e.number;
     const contactsLists = [...contacts];
