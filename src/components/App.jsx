@@ -34,7 +34,7 @@ export const App = () => {
       <ContactForm />
       <h2> Contacts</h2>
       <Filter />
-      {/* {isLoading && !error && <Loader />} */}
+      {isLoading && !error && <Loader />}
       <ContactList />
     </div>
   );
