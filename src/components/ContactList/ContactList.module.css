@@ -1,7 +1,11 @@
+.contactListContainer {
+  display: flex;
+}
+
 .contactListItem {
   display: flex;
   align-items: center;
-  font-size: 32px;
+  font-size: 24px;
 }
 
 .contactListItemBtn {

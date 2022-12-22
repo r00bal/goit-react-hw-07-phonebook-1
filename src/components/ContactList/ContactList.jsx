@@ -1,32 +1,42 @@
-import propTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { delContact } from 'redux/operations';
+import { getContacts, getFilter } from 'redux/selectors';
 import styles from './ContactList.module.css';
 
-export const ContactList = ({ contacts, handleDelete }) => (
-  <div>
-    <ul className={styles.contactList}>
-      {contacts.map((contact, id) => (
-        <li key={id} className={styles.contactListItem}>
-          {contact.name}: {contact.number}
-          <button
-            type="button"
-            className={styles.contactListItemBtn}
-            onClick={() => handleDelete(contact.id)}
-          >
-            Delete
-          </button>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+const getVisibleContacts = (contacts, filter) => {
+  if (!filter) {
+    return contacts;
+  } else {
+    return contacts.filter(contact => {
+      return contact.name.toLowerCase().includes(filter.toLowerCase());
+    });
+  }
+};
 
-ContactList.propTypes = {
-  contacts: propTypes.arrayOf(
-    propTypes.exact({
-      id: propTypes.string.isRequired,
-      name: propTypes.string.isRequired,
-      number: propTypes.string.isRequired,
-    })
-  ),
-  handleDelete: propTypes.func.isRequired,
+export const ContactList = () => {
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
+  const visibleContacts = getVisibleContacts(contacts, filter);
+
+  const dispatch = useDispatch();
+  const handleDelete = id => dispatch(delContact(id));
+
+  return (
+    <div className={styles.contactListContainer}>
+      <ul className={styles.contactList}>
+        {visibleContacts.map((contact, id) => (
+          <li key={id} className={styles.contactListItem}>
+            {contact.name}: {contact.phone}
+            <button
+              type="button"
+              className={styles.contactListItemBtn}
+              onClick={() => handleDelete(contact.id)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };

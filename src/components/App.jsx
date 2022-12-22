@@ -20,12 +20,13 @@ export const App = () => {
   return (
     <div
       style={{
-        height: '100vh',
+        // height: '100vh',
+        marginTop: '10px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        fontSize: 40,
+        fontSize: 30,
         color: '#010101',
       }}
     >
@@ -33,7 +34,7 @@ export const App = () => {
       <ContactForm />
       <h2> Contacts</h2>
       <Filter />
-      {isLoading && !error && <Loader />}
+      {/* {isLoading && !error && <Loader />} */}
       <ContactList />
     </div>
   );
